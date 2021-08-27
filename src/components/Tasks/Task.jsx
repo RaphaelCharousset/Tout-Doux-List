@@ -1,12 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Task = React.memo( ({ title, done }) => (
+const Task = React.memo( ({ id, title, done }) => {
+  const [taskTile, setTaskTitle] = useState(title)
+  const [editing, setEditing] = useState(false)
+
+  const handleBlur = (e) => {
+    setTaskTitle(e.target.value)
+    setEditing(false)
+  }
+
+  return (
   <div className="task">
-    <input
-      type="text"
-      value={title}
-    />
+    {editing ? (
+      <input
+        type="text"
+        value={taskTile}
+        autoFocus
+        onChange={e => setTaskTitle(e.target.value)}
+        onBlur={e => handleBlur(e)}
+      />
+    ) : (
+      <span
+        onClick={() => setEditing(true)}  
+      >
+        {taskTile}
+      </span>
+    )}
   </div>
-))
+)})
 
 export default Task

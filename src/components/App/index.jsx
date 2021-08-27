@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
-import Header from '../Header'
 import './App.scss'
 
-import tasksList from '../../data/fakeData'
+import data from '../../data/fakeData'
+
+import Header from '../Header'
 import Tasks from '../Tasks'
 
 function App() {
   //make state with fakedata to onChange it on input in Task
+  const [tasks, setTasks] = useState(data)
 
   return (
     <div className="App">
       <Header />
-      <Tasks tasks={tasksList} />
+      <Tasks tasks={tasks} />
     </div>
   )
 }
