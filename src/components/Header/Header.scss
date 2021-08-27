@@ -1,0 +1,24 @@
+@use '../../styles/vars';
+
+.light {
+  background: linear-gradient(90deg, rgba(vars.$linear-light-header-pink, .8) 0%, rgba(vars.$linear-light-header-blue, .8) 100%), center / cover url('../../images/mountains.png');
+}
+
+.dark {
+  background: linear-gradient(90deg, rgba(vars.$linear-dark-header-pink, .8) 0%, rgba(vars.$linear-dark-header-blue, .8) 100%), center / cover url('../../images/spaceship.png');
+}
+
+.header {
+  color: vars.$white-writing;
+
+  &__container {
+    width: 70%;
+    padding: 3rem 0;
+    margin: auto;
+  }
+
+  &__banner {
+    display: flex;
+    justify-content: space-between;
+  }
+}
