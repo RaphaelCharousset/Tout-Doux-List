@@ -2,14 +2,17 @@
 
 .main--light {
   background: linear-gradient(90deg, vars.$linear-light-body-pink 23.06%, vars.$linear-light-body-blue 59.44%);
+  color: vars.$black-writing;
 }
 
 .main--dark {
   background: linear-gradient(90deg, vars.$linear-dark-body-pink 0%, vars.$linear-dark-body-blue 100%);
+  color: vars.$white-writing;
 }
 
 .main {
   padding: 1rem .5rem;
+  flex: 1;
 
   &__container {
     display: flex;

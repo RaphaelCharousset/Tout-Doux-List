@@ -1,7 +1,16 @@
 @use '../../../styles/vars';
 
+.form--light {
+  background: rgba(vars.$white-writing, .85);
+  color: vars.$black-writing;
+}
+
+.form--dark {
+  background: vars.$very-dark-task-bg;
+  color: vars.$white-writing;
+}
+
 .header--form {
-  background: vars.$white-writing;
   display: flex;
   margin: 1rem 0;
   padding: .5rem 0;
@@ -12,7 +21,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: vars.$white-writing;
     padding: 3px;
     margin: 0 1rem;
   }

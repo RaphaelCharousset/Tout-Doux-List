@@ -23,9 +23,14 @@
   &__checker {
     padding: 3px;
     margin: 0 1rem;
+    cursor: pointer;
   }
 
   &__span, &__input {
     @extend %get-bigger;
+  }
+
+  &__input{
+    padding: 1.125rem 0;
   }
 }

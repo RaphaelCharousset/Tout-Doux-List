@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import './Form.scss'
 
-const Form = ({setTasks}) => {
+const Form = ({ darkMode, setTasks }) => {
   const [newTaskTitle, setNewTaskTitle] = useState('')
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -16,7 +16,7 @@ const Form = ({setTasks}) => {
 
   return (
   <form
-    className="header--form"
+    className={darkMode ? "header--form form--dark" : "header--form form--light"}
     onSubmit={e => handleSubmit(e)}  
   >
     <label htmlFor="new-task"></label>

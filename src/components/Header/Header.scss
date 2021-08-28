@@ -28,6 +28,10 @@
   &__banner {
     display: flex;
     justify-content: space-between;
+
+    &__switch-mode {
+      cursor: pointer;
+    }
   }
 
   &__form--container {
