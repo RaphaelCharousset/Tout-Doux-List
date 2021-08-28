@@ -18,6 +18,7 @@ const Task = React.memo( ({ darkMode, id, title, done }) => {
   }
 
   const handleBlur = (e) => {
+    // async func to update data and finally setEditing to false
     setTaskTitle(e.target.value)
     setEditing(false)
   }

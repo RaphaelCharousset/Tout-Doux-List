@@ -1,24 +1,28 @@
 import React from 'react'
 
+import { NavLink } from 'react-router-dom'
+
 import './Nav.scss'
+
+// add style on active navlink
 
 const Nav = () => (
 	<nav className="nav">
 		<ul className="nav__list">
 			<li>
-				<a href="">
+				<NavLink to='/'>
 					All
-				</a>
+				</NavLink>
 			</li>
 			<li>
-				<a href="">
+				<NavLink to='/active'>
 					Active
-				</a>
+				</NavLink>
 			</li>
 			<li>
-				<a href="">
+				<NavLink to='completed'>
 					Completed
-				</a>
+				</NavLink>
 			</li>
 		</ul>
 	</nav>

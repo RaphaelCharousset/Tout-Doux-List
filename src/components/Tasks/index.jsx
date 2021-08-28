@@ -3,9 +3,7 @@ import Task from './Task/Task'
 
 import './Tasks.scss'
 
-const Tasks = ({ darkMode, tasks }) => {
-  const undoneTasks = tasks.filter(task => !task.done)
-  const doneTasks = tasks.filter(task => task.done)
+const Tasks = ({ darkMode, undoneTasks, doneTasks }) => {
 
   return (
   <main className={ darkMode ? "main main--dark" : "main main--light" } >
