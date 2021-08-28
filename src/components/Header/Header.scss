@@ -1,11 +1,19 @@
 @use '../../styles/vars';
 
-.light {
+.header--light {
   background: linear-gradient(90deg, rgba(vars.$linear-light-header-pink, .8) 0%, rgba(vars.$linear-light-header-blue, .8) 100%), center / cover url('../../images/mountains.png');
+
+  & .header__form--container {
+    box-shadow: 0px 0px 4px vars.$black-writing;
+  }
 }
 
-.dark {
+.header--dark {
   background: linear-gradient(90deg, rgba(vars.$linear-dark-header-pink, .8) 0%, rgba(vars.$linear-dark-header-blue, .8) 100%), center / cover url('../../images/spaceship.png');
+
+  & .header__form--container {
+    box-shadow: 0px 0px 4px vars.$white-writing;
+  }
 }
 
 .header {
@@ -20,5 +28,9 @@
   &__banner {
     display: flex;
     justify-content: space-between;
+  }
+
+  &__form--container {
+    border-radius: 5px;
   }
 }

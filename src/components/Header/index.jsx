@@ -1,14 +1,11 @@
-import React, { useState } from 'react'
-import Form from './Form'
-import Nav from './Nav'
+import React, {  } from 'react'
+import Form from './Form/Form'
+import Nav from './Nav/Nav'
 
 import './Header.scss'
 
-const Header = ({setTasks}) => {
-	const [darkMode, setDarkMode] = useState(false)
-	
-	return(
-	<header className={darkMode ? "header dark" : "header light"}>
+const Header = ({darkMode, setDarkMode, setTasks}) => (
+	<header className={darkMode ? "header header--dark" : "header header--light"}>
 		<div className="header__container">
 			<div className="header__banner">
 				<h1>Tout-Doux</h1>
@@ -24,6 +21,6 @@ const Header = ({setTasks}) => {
 			<Nav />
 		</div>
 	</header>
-)}
+)
 
 export default Header

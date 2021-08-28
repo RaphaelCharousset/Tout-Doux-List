@@ -1,8 +1,10 @@
 import React from 'react'
 
+import './Nav.scss'
+
 const Nav = () => (
-	<nav>
-		<ul>
+	<nav className="nav">
+		<ul className="nav__list">
 			<li>
 				<a href="">
 					All

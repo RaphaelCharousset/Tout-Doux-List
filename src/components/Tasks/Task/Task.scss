@@ -1,0 +1,31 @@
+@use '../../../styles/vars';
+
+%get-bigger {
+  flex: 1;
+  padding: 1.3rem 0;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+
+  &.light {
+    background: rgba(vars.$white-writing, 0.7);
+    box-shadow: 0px 0px 2px vars.$linear-dark-body-blue;
+  }
+
+  &.dark {
+    background: rgba(vars.$very-dark-task-bg, 0.89);
+    box-shadow: 0px 0px 2px vars.$linear-light-body-pink;
+  }
+
+  &__checker {
+    padding: 3px;
+    margin: 0 1rem;
+  }
+
+  &__span, &__input {
+    @extend %get-bigger;
+  }
+}

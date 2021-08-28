@@ -1,0 +1,19 @@
+@use '../../styles/vars';
+
+.main--light {
+  background: linear-gradient(90deg, vars.$linear-light-body-pink 23.06%, vars.$linear-light-body-blue 59.44%);
+}
+
+.main--dark {
+  background: linear-gradient(90deg, vars.$linear-dark-body-pink 0%, vars.$linear-dark-body-blue 100%);
+}
+
+.main {
+  padding: 1rem .5rem;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+}
