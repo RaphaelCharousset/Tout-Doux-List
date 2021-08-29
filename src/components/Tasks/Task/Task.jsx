@@ -24,7 +24,7 @@ const Task = React.memo( ({ darkMode, id, title, done }) => {
   }
 
   return (
-  <div className={manageClassName()}>
+  <div className={manageClassName()} >
   {done ? (
     // onClick, switch to done: !done
     <div className="task__checker">

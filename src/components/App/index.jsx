@@ -25,11 +25,11 @@ function App() {
       </Route>
       {/* manage props to Tasks */}
       <Route exact path='/active'>
-        <Tasks darkMode={darkMode} undoneTasks={undoneTasks} doneTasks={doneTasks} />
+        <Tasks darkMode={darkMode} undoneTasks={undoneTasks} doneTasks={null} />
       </Route>
       {/* manage props to Tasks */}
       <Route exact path='/completed'>
-        <Tasks darkMode={darkMode} undoneTasks={undoneTasks} doneTasks={doneTasks} />
+        <Tasks darkMode={darkMode} undoneTasks={null} doneTasks={doneTasks} />
       </Route>
       {/* redirect on /all ? */}
       {/* add 404 */}
