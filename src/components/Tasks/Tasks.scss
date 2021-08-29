@@ -1,5 +1,11 @@
 @use '../../styles/vars';
 
+%flex-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
 .main--light {
   background: linear-gradient(90deg, vars.$linear-light-body-pink 23.06%, vars.$linear-light-body-blue 59.44%);
   color: vars.$black-writing;
@@ -15,8 +21,10 @@
   flex: 1;
 
   &__container {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
+    @extend %flex-tasks;
+
+    &__undone, &__done {
+      @extend %flex-tasks;
+    }
   }
 }

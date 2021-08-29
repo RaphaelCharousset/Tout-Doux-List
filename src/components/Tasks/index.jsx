@@ -9,10 +9,18 @@ const Tasks = ({ darkMode, undoneTasks, doneTasks }) => {
   <main className={ darkMode ? "main main--dark" : "main main--light" } >
     <div className="main__container">
       {
-        undoneTasks.map( task => <Task key={task.id} {...task} darkMode={darkMode} />)
+        undoneTasks
+        ? <div className="main__container__undone">
+            {undoneTasks.map( task => <Task key={task.id} {...task} darkMode={darkMode} />)}
+          </div>
+        : null
       }
       {
-        doneTasks.map( task => <Task key={task.id} {...task} darkMode={darkMode} />)
+        doneTasks
+        ? <div className="main__container__done">
+            {doneTasks.map( task => <Task key={task.id} {...task} darkMode={darkMode} />)}
+          </div>
+        : null
       }
     </div>
   </main>
