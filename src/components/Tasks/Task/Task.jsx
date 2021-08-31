@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import './Task.scss'
 
-const Task = React.memo( ({ darkMode, id, title, done }) => {
+const Task = React.memo( ({ id, title, done }) => {
+  const darkMode = useSelector(state => state.darkMode)
+
   const [taskTile, setTaskTitle] = useState(title)
   const [editing, setEditing] = useState(false)
 

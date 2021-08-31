@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { addNewTask, updateNewtaskInput } from '../../../actions'
 
 import './Form.scss'
 
-const Form = ({ darkMode, setTasks }) => {
-  const [newTaskTitle, setNewTaskTitle] = useState('')
+const Form = () => {
+  const { darkMode, newTaskInput } = useSelector(state => state.darkMode)
+
+  const dispatch = useDispatch()
+
+  const handleChange = (value) => {
+    dispatch(updateNewtaskInput(value))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    setTasks(old => [...old, {
-      id: Date.now(),
-      title: newTaskTitle,
-      done: false
-    }])
-    setNewTaskTitle('')
+    dispatch(addNewTask())
+    dispatch(updateNewtaskInput(''))
   }
 
   return (
@@ -38,8 +43,8 @@ const Form = ({ darkMode, setTasks }) => {
       id="new-task"
       required
       placeholder="Enter new task"
-      value={newTaskTitle}
-      onChange={e => setNewTaskTitle(e.target.value)}
+      value={newTaskInput}
+      onChange={e => handleChange(e.target.value)}
     />
 
   </form>
