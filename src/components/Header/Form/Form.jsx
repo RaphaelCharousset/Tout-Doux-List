@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addNewTask, saving, updateNewtaskInput } from '../../../actions'
+import addTaskToBdd from '../../../hooks/addTaskToBdd'
 
 import './Form.scss'
 
@@ -15,6 +16,8 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    
+    addTaskToBdd(newTaskInput)  
     dispatch(addNewTask())
     dispatch(updateNewtaskInput(''))
     dispatch(saving())

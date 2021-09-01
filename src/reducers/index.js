@@ -8,10 +8,10 @@ import {
   UPDATE__NEWTASK__INPUT
 } from '../actions';
 
-import data from '../data/fakeData'
 import getData from '../hooks/getData';
 
 const tasks = getData
+console.log(tasks);
 
 const initialState = {
   darkMode: false,

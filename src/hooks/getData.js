@@ -1,10 +1,9 @@
 import { getDocs } from "firebase/firestore"
-import { todosCol } from "../firebase/firebaseConfig"
+import { tasksCol } from "../firebase/firebaseConfig"
 
-const accessDocs = await getDocs(todosCol)
-const data = await accessDocs.docs.map(doc => doc.data())
+const accessDocs = await getDocs(tasksCol)
 
 // get only tasks from only user ATM
-const getData = data[0].tasks
+const getData = await accessDocs.docs.map(doc => doc.data())
 
 export default getData
