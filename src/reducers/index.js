@@ -1,4 +1,3 @@
-//* change it when bdd is ok
 import {
   ADD__NEW__TASK,
   CLEAR__COMPLETED__TASKS,
@@ -7,16 +6,17 @@ import {
   TOGGLE__DONE__TASK,
   UPDATE__NEWTASK__INPUT
 } from '../actions';
+import addTaskToBdd from '../hooks/addTaskToBdd';
 
-import getData from '../hooks/getData';
+import deleteTaskFromBdd from '../hooks/deleteTaskFromBdd';
 
-const tasks = getData
-console.log(tasks);
+import { getData } from '../hooks/getData'
+
+console.log(getData);
 
 const initialState = {
   darkMode: false,
-  //*change it when bdd is ok
-  tasks: tasks,
+  tasks: getData,
   newTaskInput: '',
   saving: false
 };
@@ -28,30 +28,36 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         saving: !state.saving
       }
+
     case TOGGLE__DARKMODE:
       return {
         ...state,
         darkMode: !state.darkMode, 
       };
+
     case ADD__NEW__TASK:
-      return {
-        ...state,
-        tasks: [
-          ...state.tasks,
-          {
-            id: state.tasks.length + 1,
-            title: state.newTaskInput,
-            done: false
-          }
-        ],
-        newTaskInput: '',
-      };
+        return {
+          ...state,
+          tasks: [
+            ...getData,
+            {
+              id: Date.now(),
+              done: false,
+              order: 0,
+              title: state.newTaskInput
+            }
+          ],
+          newTaskInput: '',
+        }
+      
     case UPDATE__NEWTASK__INPUT:
       return {
         ...state,
         newTaskInput: action.value
       }
+
     case TOGGLE__DONE__TASK:
+      //todo just update data and return tasks: getData
       const toggleCopy = [...state.tasks]
       toggleCopy.forEach(task => {
         if (task.id == action.id) {
@@ -63,11 +69,13 @@ const reducer = (state = initialState, action = {}) => {
         tasks: toggleCopy
       }
     case CLEAR__COMPLETED__TASKS:
-      const clearCopy = [...state.tasks]
-      const undoneTasks = clearCopy.filter(task => !task.done)
+      console.log(state.tasks);
+      state.tasks.forEach(async (task) => {
+        if (task.don) await deleteTaskFromBdd(task.id)
+      })
       return {
         ...state,
-        tasks: undoneTasks
+        tasks: getData
       }
     default:
       return state;

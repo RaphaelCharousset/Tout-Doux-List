@@ -14,12 +14,11 @@ const Form = () => {
     dispatch(updateNewtaskInput(value))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     
-    addTaskToBdd(newTaskInput)  
+    await addTaskToBdd(newTaskInput)  
     dispatch(addNewTask())
-    dispatch(updateNewtaskInput(''))
     dispatch(saving())
     setTimeout(() => {
       dispatch(saving())

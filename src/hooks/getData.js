@@ -4,6 +4,9 @@ import { tasksCol } from "../firebase/firebaseConfig"
 const accessDocs = await getDocs(tasksCol)
 
 // get only tasks from only user ATM
-const getData = await accessDocs.docs.map(doc => doc.data())
-
-export default getData
+export const getData = accessDocs.docs.map(doc => {
+  return {
+    ...doc.data(),
+    id: doc.id
+  }
+})

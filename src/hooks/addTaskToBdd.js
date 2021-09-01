@@ -4,7 +4,6 @@ import { db } from "../firebase/firebaseConfig";
 const addTaskToBdd = async (value) => {
   try {
     const docRef = await addDoc(collection(db, "tasks"), {
-      id: Date.now(),
       done: false,
       order: 0,
       title: value
