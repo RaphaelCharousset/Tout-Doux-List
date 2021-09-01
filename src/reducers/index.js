@@ -1,5 +1,3 @@
-// import  from '../actions';
-
 //* change it when bdd is ok
 import {
   ADD__NEW__TASK,
@@ -9,12 +7,16 @@ import {
   TOGGLE__DONE__TASK,
   UPDATE__NEWTASK__INPUT
 } from '../actions';
+
 import data from '../data/fakeData'
+import getData from '../hooks/getData';
+
+const tasks = getData
 
 const initialState = {
   darkMode: false,
   //*change it when bdd is ok
-  tasks: data,
+  tasks: tasks,
   newTaskInput: '',
   saving: false
 };
