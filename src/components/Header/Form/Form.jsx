@@ -5,7 +5,7 @@ import { addNewTask, updateNewtaskInput } from '../../../actions'
 import './Form.scss'
 
 const Form = () => {
-  const { darkMode, newTaskInput } = useSelector(state => state.darkMode)
+  const { darkMode, newTaskInput } = useSelector(state => state)
 
   const dispatch = useDispatch()
 

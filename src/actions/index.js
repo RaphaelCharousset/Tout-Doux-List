@@ -22,3 +22,13 @@ export const updateNewtaskInput = (value) => (
     value
   }
 );
+
+export const TOGGLE__DONE__TASK = 'TOGGLE__DONE__TASK';
+
+export const toggleDoneTask = (id) => (
+   {
+    type: TOGGLE__DONE__TASK,
+    id
+  }
+);
+

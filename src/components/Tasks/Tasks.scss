@@ -26,5 +26,9 @@
     &__undone, &__done {
       @extend %flex-tasks;
     }
+
+    &__done {
+      text-decoration: line-through;
+    }
   }
 }
