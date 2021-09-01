@@ -1,7 +1,13 @@
 // import  from '../actions';
 
 //* change it when bdd is ok
-import { ADD__NEW__TASK, TOGGLE__DARKMODE, TOGGLE__DONE__TASK, UPDATE__NEWTASK__INPUT } from '../actions';
+import {
+  ADD__NEW__TASK,
+  CLEAR__COMPLETED__TASKS,
+  TOGGLE__DARKMODE,
+  TOGGLE__DONE__TASK,
+  UPDATE__NEWTASK__INPUT
+} from '../actions';
 import data from '../data/fakeData'
 
 const initialState = {
@@ -37,15 +43,22 @@ const reducer = (state = initialState, action = {}) => {
         newTaskInput: action.value
       }
     case TOGGLE__DONE__TASK:
-      const copy = [...state.tasks]
-      copy.forEach(task => {
+      const toggleCopy = [...state.tasks]
+      toggleCopy.forEach(task => {
         if (task.id == action.id) {
           task.done = !task.done
         }
       })
       return {
         ...state,
-        tasks: copy
+        tasks: toggleCopy
+      }
+    case CLEAR__COMPLETED__TASKS:
+      const clearCopy = [...state.tasks]
+      const undoneTasks = clearCopy.filter(task => !task.done)
+      return {
+        ...state,
+        tasks: undoneTasks
       }
     default:
       return state;

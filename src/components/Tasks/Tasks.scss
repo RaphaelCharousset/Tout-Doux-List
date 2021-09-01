@@ -19,6 +19,7 @@
 .main {
   padding: 1rem .5rem;
   flex: 1;
+  overflow-y: scroll;
 
   &__container {
     @extend %flex-tasks;

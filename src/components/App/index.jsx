@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom'
 import Clear from '../Clear'
 
 import Header from '../Header'
+import { Modal } from '../Modal'
 import Tasks from '../Tasks'
 
 import './App.scss'
@@ -32,6 +33,7 @@ function App() {
         <Tasks undoneTasks={null} doneTasks={doneTasks} />
         <Clear />
       </Route>
+      <Modal />
       {/* redirect on /all ? */}
       {/* add 404 */}
     </div>

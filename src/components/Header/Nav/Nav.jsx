@@ -10,17 +10,17 @@ const Nav = () => (
 	<nav className="nav">
 		<ul className="nav__list">
 			<li>
-				<NavLink to='/'>
+				<NavLink exact to='/'>
 					All
 				</NavLink>
 			</li>
 			<li>
-				<NavLink to='/active'>
+				<NavLink exact to='/active'>
 					Active
 				</NavLink>
 			</li>
 			<li>
-				<NavLink to='completed'>
+				<NavLink exact to='completed'>
 					Completed
 				</NavLink>
 			</li>
