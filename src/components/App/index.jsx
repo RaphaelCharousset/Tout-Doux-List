@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { Route } from 'react-router-dom'
+import Clear from '../Clear'
 
 import Header from '../Header'
 import Tasks from '../Tasks'
@@ -20,6 +21,7 @@ function App() {
         <Header />
       <Route exact path='/'>
         <Tasks undoneTasks={undoneTasks} doneTasks={doneTasks} />
+        <Clear />
       </Route>
       {/* manage props to Tasks */}
       <Route exact path='/active'>
@@ -28,6 +30,7 @@ function App() {
       {/* manage props to Tasks */}
       <Route exact path='/completed'>
         <Tasks undoneTasks={null} doneTasks={doneTasks} />
+        <Clear />
       </Route>
       {/* redirect on /all ? */}
       {/* add 404 */}

@@ -1,0 +1,30 @@
+@use '../../styles/vars';
+
+.clear {
+
+  //! seulement si width du btn < 100%
+  &.light {
+    background: linear-gradient(90deg, vars.$linear-light-body-pink 23.06%, vars.$linear-light-body-blue 59.44%);
+    color: vars.$black-writing;
+  }
+
+  &.dark {
+    background: linear-gradient(90deg, vars.$linear-dark-body-pink 0%, vars.$linear-dark-body-blue 100%);
+    color: vars.$white-writing;
+  }
+
+
+  &__btn {
+    width: 100%;
+    margin: auto;
+    padding: 2px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background: vars.$english-red;
+    color: white;
+    font-size: .8rem;
+    border-radius: 5px;
+  }
+}
