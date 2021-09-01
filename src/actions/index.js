@@ -1,3 +1,10 @@
+export const SAVING = 'SAVING';
+export const saving = () => (
+   {
+    type: SAVING
+  }
+);
+
 export const TOGGLE__DARKMODE = 'TOGGLE__DARKMODE';
 export const toggleDarkMode = () => (
    {

@@ -12,7 +12,7 @@ import './App.scss'
 
 function App() {
   //make state with data to onChange it on input in Task and in Form
-  const tasks  = useSelector(state => state.tasks)
+  const {saving, tasks}  = useSelector(state => state)
 
   const undoneTasks = tasks.filter(task => !task.done)
   const doneTasks = tasks.filter(task => task.done)
@@ -33,7 +33,9 @@ function App() {
         <Tasks undoneTasks={null} doneTasks={doneTasks} />
         <Clear />
       </Route>
-      <Modal />
+      {
+        saving && <Modal />
+      }
       {/* redirect on /all ? */}
       {/* add 404 */}
     </div>

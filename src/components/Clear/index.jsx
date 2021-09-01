@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { clearCompletedTasks } from '../../actions'
+import { clearCompletedTasks, saving } from '../../actions'
 
 import './clear.scss'
 
@@ -9,8 +9,11 @@ const Clear = () => {
 
   const handleClick = () => {
     dispatch(clearCompletedTasks())
+    dispatch(saving())
+    setTimeout(() => {
+      dispatch(saving())
+    }, 500);
   }
-
 
   return (
     <button className="clear" onClick={() => handleClick()}>

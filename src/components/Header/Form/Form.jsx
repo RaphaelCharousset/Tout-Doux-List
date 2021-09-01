@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addNewTask, updateNewtaskInput } from '../../../actions'
+import { addNewTask, saving, updateNewtaskInput } from '../../../actions'
 
 import './Form.scss'
 
@@ -17,6 +17,10 @@ const Form = () => {
     e.preventDefault()
     dispatch(addNewTask())
     dispatch(updateNewtaskInput(''))
+    dispatch(saving())
+    setTimeout(() => {
+      dispatch(saving())
+    }, 500);
   }
 
   return (

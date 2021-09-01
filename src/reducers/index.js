@@ -4,6 +4,7 @@
 import {
   ADD__NEW__TASK,
   CLEAR__COMPLETED__TASKS,
+  SAVING,
   TOGGLE__DARKMODE,
   TOGGLE__DONE__TASK,
   UPDATE__NEWTASK__INPUT
@@ -15,10 +16,16 @@ const initialState = {
   //*change it when bdd is ok
   tasks: data,
   newTaskInput: '',
+  saving: false
 };
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case SAVING:
+      return {
+        ...state,
+        saving: !state.saving
+      }
     case TOGGLE__DARKMODE:
       return {
         ...state,
