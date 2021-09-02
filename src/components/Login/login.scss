@@ -1,0 +1,25 @@
+@use '../../styles/vars';
+
+.connect-modal {
+  background: linear-gradient(90deg, rgba(vars.$linear-light-header-pink, .8) 0%, rgba(vars.$linear-light-header-blue, .8) 100%), center / cover url('../../images/mountains.png');
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  &__title {
+    color: vars.$white-writing;
+    font-size: 1.3rem;
+    margin: 3rem 0 5rem;
+  }
+
+  &__container {
+    width: 90%;
+    padding: 1rem;
+    border: 2px solid vars.$white-writing;
+
+    & .inactive {
+      display: none;
+    }
+  }
+}

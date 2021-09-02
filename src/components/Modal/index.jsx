@@ -4,7 +4,7 @@ import './modal.scss'
 
 export const Modal = () => {
   return (
-    <div className="modal">
+    <div className="modal-save">
       Sauvegardé
     </div>
   )

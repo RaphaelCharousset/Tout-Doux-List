@@ -17,7 +17,8 @@ const initialState = {
   darkMode: false,
   tasks: getData,
   newTaskInput: '',
-  saving: false
+  saving: false,
+  user: undefined
 };
 
 const reducer = (state = initialState, action = {}) => {
