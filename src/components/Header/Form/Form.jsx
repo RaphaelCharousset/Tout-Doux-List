@@ -17,8 +17,8 @@ const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    await addTaskToBdd(newTaskInput)  
-    dispatch(addNewTask())
+    const id = await addTaskToBdd(newTaskInput)
+    dispatch(addNewTask(id))
     dispatch(saving())
     setTimeout(() => {
       dispatch(saving())

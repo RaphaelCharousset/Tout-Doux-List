@@ -6,7 +6,6 @@ import {
   TOGGLE__DONE__TASK,
   UPDATE__NEWTASK__INPUT
 } from '../actions';
-import addTaskToBdd from '../hooks/addTaskToBdd';
 
 import deleteTaskFromBdd from '../hooks/deleteTaskFromBdd';
 
@@ -39,9 +38,9 @@ const reducer = (state = initialState, action = {}) => {
         return {
           ...state,
           tasks: [
-            ...getData,
+            ...state.tasks,
             {
-              id: Date.now(),
+              id: action.id,
               done: false,
               order: 0,
               title: state.newTaskInput
@@ -49,7 +48,7 @@ const reducer = (state = initialState, action = {}) => {
           ],
           newTaskInput: '',
         }
-      
+  
     case UPDATE__NEWTASK__INPUT:
       return {
         ...state,
@@ -57,7 +56,6 @@ const reducer = (state = initialState, action = {}) => {
       }
 
     case TOGGLE__DONE__TASK:
-      //todo just update data and return tasks: getData
       const toggleCopy = [...state.tasks]
       toggleCopy.forEach(task => {
         if (task.id == action.id) {
@@ -69,13 +67,14 @@ const reducer = (state = initialState, action = {}) => {
         tasks: toggleCopy
       }
     case CLEAR__COMPLETED__TASKS:
-      console.log(state.tasks);
-      state.tasks.forEach(async (task) => {
-        if (task.don) await deleteTaskFromBdd(task.id)
+      state.tasks.forEach( (task) => {
+        if (task.done) {
+          deleteTaskFromBdd(task.id)
+        }
       })
       return {
         ...state,
-        tasks: getData
+        tasks: state.tasks.filter(task => !task.done)
       }
     default:
       return state;

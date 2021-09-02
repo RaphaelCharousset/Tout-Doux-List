@@ -1,28 +1,31 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { saving, toggleDoneTask } from '../../../actions'
+import updateTaskInBdd from '../../../hooks/updateTaskInBdd'
 
-import './Task.scss'
+import './Task.scss' 
 
-const Task =({ id, title, done }) => {
+const Task = ({ id, title, done, order }) => {
   const dispatch = useDispatch()
   const darkMode = useSelector(state => state.darkMode)
 
   const [taskTile, setTaskTitle] = useState(title)
   const [editing, setEditing] = useState(false)
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     dispatch(toggleDoneTask(e.target.closest('.task__checker').id))
+    await updateTaskInBdd({id, title, done: !done, order})
     dispatch(saving())
     setTimeout(() => {
       dispatch(saving())
     }, 500);
   }
 
-  const handleBlur = (e) => {
+  const handleBlur = async (e) => {
     // async func to update data and finally setEditing to false
-    setTaskTitle(e.target.value)
+    await setTaskTitle(e.target.value)
     setEditing(false)
+    await updateTaskInBdd({id, title: taskTile, done, order})
     dispatch(saving())
     setTimeout(() => {
       dispatch(saving())

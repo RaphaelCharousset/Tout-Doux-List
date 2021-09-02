@@ -13,9 +13,10 @@ export const toggleDarkMode = () => (
 );
 
 export const ADD__NEW__TASK = 'ADD__NEW__TASK';
-export const addNewTask = () => (
+export const addNewTask = (id) => (
    {
     type: ADD__NEW__TASK,
+    id
   }
 );
 

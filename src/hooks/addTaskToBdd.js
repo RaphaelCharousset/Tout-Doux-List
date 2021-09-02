@@ -8,7 +8,7 @@ const addTaskToBdd = async (value) => {
       order: 0,
       title: value
     });
-    console.log("Document written with ID: ", docRef.id);
+    return docRef.id;
   } catch (e) {
     console.error("Error adding document: ", e);
   }
