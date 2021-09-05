@@ -7,7 +7,7 @@ import {
   UPDATE__NEWTASK__INPUT
 } from '../actions';
 
-import deleteTaskFromBdd from '../hooks/deleteTaskFromBdd';
+import deleteTaskFromBdd from '../hooks/deleteTaskFromBdd'
 
 import { getData } from '../hooks/getData'
 
@@ -19,10 +19,15 @@ const initialState = {
   newTaskInput: '',
   saving: false,
   user: undefined
-};
+}
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case 'CONNECT':
+      return {
+        ...state,
+        user: true
+      }
     case SAVING:
       return {
         ...state,
@@ -33,7 +38,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         darkMode: !state.darkMode, 
-      };
+      }
 
     case ADD__NEW__TASK:
         return {

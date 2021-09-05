@@ -1,11 +1,26 @@
 @use '../../styles/vars';
 
+%thin-light-border-and-padding {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 1rem 0;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    background: vars.$white-writing;
+    color: vars.$linear-dark-body-pink;
+  }
+}
+
 .connect-modal {
-  background: linear-gradient(90deg, rgba(vars.$linear-light-header-pink, .8) 0%, rgba(vars.$linear-light-header-blue, .8) 100%), center / cover url('../../images/mountains.png');
+  background: linear-gradient(90deg, rgba(vars.$linear-light-header-pink, .8) 0%, rgba(vars.$linear-light-header-blue, .8) 100%), center / cover url('../../images/login.png');
   min-height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
+  color: vars.$linear-dark-body-blue;
+  font-size: 1.2rem;
 
   &__title {
     color: vars.$white-writing;
@@ -21,5 +36,45 @@
     & .inactive {
       display: none;
     }
+  }
+
+  &__choice {
+    text-align: center;
+    display: flex;
+    gap: .5rem;
+
+    & h2 {
+      flex: 1;
+      @extend %thin-light-border-and-padding;
+    }
+
+    & .active {
+      background: vars.$white-writing;
+      color: vars.$linear-dark-body-pink;
+    }
+  }
+
+  &__form {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+      & input {
+        background:rgba(vars.$linear-dark-header-blue, .4);
+        padding: .5rem 1rem;
+        border-radius: 5px;
+        color: vars.$white-writing;
+    
+        &::placeholder {
+          color: rgba(vars.$white-writing, .4);
+        }
+      }
+
+      & button {
+        background: white;
+        color: vars.$linear-dark-body-pink;
+        @extend %thin-light-border-and-padding;
+      }
   }
 }
