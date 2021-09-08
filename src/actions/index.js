@@ -42,3 +42,19 @@ export const clearCompletedTasks = () => (
     type: CLEAR__COMPLETED__TASKS,
   }
 );
+
+export const CONNECT = 'CONNECT';
+export const connect = ({uid}) => (
+   {
+    type: CONNECT,
+    user: uid
+  }
+);
+
+// export const FETCH_TASKS = 'FETCH_TASKS';
+// export const fetchTasks = ({uid}) => (
+//    {
+//     type: FETCH_TASKS,
+//     user: uid
+//   }
+// );

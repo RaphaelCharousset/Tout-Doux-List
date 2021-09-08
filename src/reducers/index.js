@@ -1,6 +1,7 @@
 import {
   ADD__NEW__TASK,
   CLEAR__COMPLETED__TASKS,
+  CONNECT,
   SAVING,
   TOGGLE__DARKMODE,
   TOGGLE__DONE__TASK,
@@ -11,11 +12,11 @@ import deleteTaskFromBdd from '../hooks/deleteTaskFromBdd'
 
 import { getData } from '../hooks/getData'
 
-console.log(getData);
+// console.log(await getData());
 
 const initialState = {
   darkMode: false,
-  tasks: getData,
+  tasks: [],
   newTaskInput: '',
   saving: false,
   user: undefined
@@ -23,10 +24,15 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'CONNECT':
+    case CONNECT:
       return {
         ...state,
-        user: true
+        user: action.user,
+      }
+    case 'SET_TASKS':
+      return {
+        ...state,
+        tasks: action.tasks
       }
     case SAVING:
       return {
@@ -49,7 +55,8 @@ const reducer = (state = initialState, action = {}) => {
               id: action.id,
               done: false,
               order: 0,
-              title: state.newTaskInput
+              title: state.newTaskInput,
+              uid: state.uid
             }
           ],
           newTaskInput: '',

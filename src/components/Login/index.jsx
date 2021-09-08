@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+import { connect } from '../../actions'
+
 import './login.scss'
 
 const Login = () => {
+  const auth = getAuth();
   const dispatch = useDispatch()
 
-  const [toggleSiginIn, setToggleSiginIn] = useState(true)
+  const [toggleSignIn, setToggleSignIn] = useState(true)
   const [toggleRegister, setToggleRegister] = useState(false)
 
   const handleSignInClick = () => {
-    if (!toggleSiginIn) {
-      setToggleSiginIn(true)
+    if (!toggleSignIn) {
+      setToggleSignIn(true)
       setToggleRegister(false)
     }
   }
@@ -19,19 +24,33 @@ const Login = () => {
   const handleRegisterClick = () => {
     if (!toggleRegister) {
       setToggleRegister(true)
-      setToggleSiginIn(false)
+      setToggleSignIn(false)
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
+    const email = e.target[0].value
+    const password = e.target[1].value
     //todo check if sign or register
     // if sign in, find in bdd user with email && pwd and add it in action payload and assign it in reducer
     // if register, find account with with this email
       // if no account found, create account
       // if account found, show msg
-    dispatch({type: 'CONNECT'})
+
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        const user = userCredential.user;
+        console.log(user);
+        dispatch(connect(user))
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.warn(errorCode, errorMessage);
+      });
   }
   
   return (
@@ -41,7 +60,7 @@ const Login = () => {
 
         <div className="connect-modal__choice">
           <h2
-            className={toggleSiginIn ? "login__title active" : "login__title"}
+            className={toggleSignIn ? "login__title active" : "login__title"}
             onClick={() => handleSignInClick()}
           >
             <label htmlFor="email">SIGN IN</label>
@@ -55,7 +74,7 @@ const Login = () => {
           </h2>
         </div>
           
-        <div className={toggleSiginIn ? "active" : "inactive"}>
+        <div className={toggleSignIn ? "active" : "inactive"}>
           <form
             className="connect-modal__form"
             onSubmit={(e) => handleSubmit(e)}

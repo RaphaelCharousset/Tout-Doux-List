@@ -7,14 +7,15 @@ import './Task.scss'
 
 const Task = ({ id, title, done, order }) => {
   const dispatch = useDispatch()
-  const darkMode = useSelector(state => state.darkMode)
+  const {darkMode, user} = useSelector(state => state)
 
   const [taskTile, setTaskTitle] = useState(title)
   const [editing, setEditing] = useState(false)
 
   const handleClick = async (e) => {
+    console.log('uid dans task ', user);
     dispatch(toggleDoneTask(e.target.closest('.task__checker').id))
-    await updateTaskInBdd({id, title, done: !done, order})
+    await updateTaskInBdd({id, title, done: !done, order, uid: user})
     dispatch(saving())
     setTimeout(() => {
       dispatch(saving())
@@ -23,9 +24,10 @@ const Task = ({ id, title, done, order }) => {
 
   const handleBlur = async (e) => {
     // async func to update data and finally setEditing to false
+    // switch tasks in store to save it there and avoid bug on change title before change done bool
     await setTaskTitle(e.target.value)
     setEditing(false)
-    await updateTaskInBdd({id, title: taskTile, done, order})
+    await updateTaskInBdd({id, title: taskTile, done, order, uid})
     dispatch(saving())
     setTimeout(() => {
       dispatch(saving())

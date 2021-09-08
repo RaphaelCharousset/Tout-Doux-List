@@ -6,7 +6,7 @@ import addTaskToBdd from '../../../hooks/addTaskToBdd'
 import './Form.scss'
 
 const Form = () => {
-  const { darkMode, newTaskInput } = useSelector(state => state)
+  const { darkMode, newTaskInput, user } = useSelector(state => state)
 
   const dispatch = useDispatch()
 
@@ -17,7 +17,10 @@ const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    const id = await addTaskToBdd(newTaskInput)
+    console.log(user);
+    const id = await addTaskToBdd(newTaskInput, user)
+    console.log(id);
+    await updateNewtaskInput({id, newTaskInput, uid: user})
     dispatch(addNewTask(id))
     dispatch(saving())
     setTimeout(() => {
