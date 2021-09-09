@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
 import { connect } from '../../actions'
 
 import './login.scss'
+import { LoginModal } from '../LoginModal';
 
 const Login = () => {
   const auth = getAuth();
@@ -13,6 +14,8 @@ const Login = () => {
 
   const [toggleSignIn, setToggleSignIn] = useState(true)
   const [toggleRegister, setToggleRegister] = useState(false)
+  const [showModal, setShowModal] = useState(undefined)
+  const [goodMsg, setGoodMsg] = useState(false)
 
   const handleSignInClick = () => {
     if (!toggleSignIn) {
@@ -28,8 +31,9 @@ const Login = () => {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmitSignIn = (e) => {
     e.preventDefault()
+    setShowModal(undefined)
     const email = e.target[0].value
     const password = e.target[1].value
     //todo check if sign or register
@@ -44,15 +48,43 @@ const Login = () => {
         const user = userCredential.user;
         console.log(user);
         dispatch(connect(user))
+
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.warn(errorCode, errorMessage);
+        setGoodMsg(false)
+        setShowModal("Can't sign in")
       });
   }
   
+  const handleSubmitRegister = (e) => {
+    e.preventDefault()
+    setShowModal(undefined)
+    const email = e.target[0].value
+    const password = e.target[1].value
+
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      setGoodMsg(false)
+      setShowModal("This mail is already taken !")
+    })
+    .catch((error) => {
+      // user doesn't exist so create new acocunt
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          setGoodMsg(true)
+          setShowModal("Account created with success ! You can sign in now")
+        })
+        .catch((error) => {
+          setGoodMsg(false)
+          setShowModal("This mail is already taken !")
+        });
+    })
+  }
+
   return (
     <div className="connect-modal">
       <h1 className="connect-modal__title">Tout-doux</h1>
@@ -77,7 +109,7 @@ const Login = () => {
         <div className={toggleSignIn ? "active" : "inactive"}>
           <form
             className="connect-modal__form"
-            onSubmit={(e) => handleSubmit(e)}
+            onSubmit={(e) => handleSubmitSignIn(e)}
           >
             <input
               type="email"
@@ -97,16 +129,18 @@ const Login = () => {
         <div className={toggleRegister ? "active" : "inactive"}>
             <form
               className="connect-modal__form"
-              onSubmit={(e) => handleSubmit(e)}
+              onSubmit={(e) => handleSubmitRegister(e)}
             >
               <input
                 type="email"
                 name="register"
                 placeholder="Email"
+                minLength="10"
               />
               <input
                 type="password"
                 placeholder="Password"
+                minLength="5"
               />
               <button type="submit">
                 Register
@@ -114,6 +148,8 @@ const Login = () => {
             </form>
           </div>   
       </div>
+
+      {showModal && <LoginModal message={showModal} goodMsg={goodMsg} />}
     </div>
   )
 }

@@ -27,7 +27,7 @@ const Task = ({ id, title, done, order }) => {
     // switch tasks in store to save it there and avoid bug on change title before change done bool
     await setTaskTitle(e.target.value)
     setEditing(false)
-    await updateTaskInBdd({id, title: taskTile, done, order, uid})
+    await updateTaskInBdd({id, title: taskTile, done, order, uid: user})
     dispatch(saving())
     setTimeout(() => {
       dispatch(saving())
