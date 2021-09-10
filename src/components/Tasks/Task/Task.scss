@@ -30,7 +30,14 @@
     @extend %get-bigger;
   }
 
-  &__input{
+  &__input {
     padding: 1.125rem 0;
+  }
+
+  &__trash {
+    margin-right: 1rem;
+    cursor: pointer;
+    color: vars.$english-red;
+    transform: scale(1.1);
   }
 }

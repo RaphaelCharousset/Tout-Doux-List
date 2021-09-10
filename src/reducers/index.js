@@ -1,6 +1,7 @@
 import {
   ADD__NEW__TASK,
   CLEAR__COMPLETED__TASKS,
+  CLEAR__SINGLE__TASK,
   CONNECT,
   SAVING,
   TOGGLE__DARKMODE,
@@ -79,6 +80,18 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         tasks: toggleCopy
+      }
+
+    case CLEAR__SINGLE__TASK:
+      const copyMinusOne = []
+      state.tasks.map( task => {
+        if (task.id != action.id) {
+          copyMinusOne.push(task)
+        }
+      })
+      return {
+        ...state,
+        tasks: copyMinusOne
       }
 
     case CLEAR__COMPLETED__TASKS:

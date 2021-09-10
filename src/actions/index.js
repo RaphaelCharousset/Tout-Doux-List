@@ -36,6 +36,12 @@ export const toggleDoneTask = (id) => (
   }
 );
 
+export const CLEAR__SINGLE__TASK = 'CLEAR__SINGLE__TASK';
+export const clearSingleTask = (id) => ({
+  type: CLEAR__SINGLE__TASK,
+  id
+})
+
 export const CLEAR__COMPLETED__TASKS = 'CLEAR__COMPLETED__TASKS';
 export const clearCompletedTasks = () => (
    {
