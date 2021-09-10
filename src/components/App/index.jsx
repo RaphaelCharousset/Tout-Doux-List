@@ -12,7 +12,7 @@ import Tasks from '../Tasks'
 
 import './App.scss'
 import updateTaskInBdd from '../../hooks/updateTaskInBdd'
-import { updateAllTasksInState, updateTaskInState } from '../../actions'
+import { updateAllTasksInState } from '../../actions'
 import { useDispatch } from 'react-redux'
 
 function App() {
@@ -25,19 +25,12 @@ function App() {
   const undoneTasks = unsortedUndoneTasks ? unsortedUndoneTasks.sort((a, b) => a.order - b.order) : unsortedUndoneTasks
   const doneTasks = unsortedDoneTasks ? unsortedDoneTasks.sort((a, b) => a.order - b.order) : unsortedDoneTasks
 
-  // console.log('unsorted : ', unsortedUndoneTasks);
-  // console.log('sorted : ', undoneTasks);
-
   const onDragEnd = (e) => {
 
     const {destination, draggableId, source} = e
-    console.log('source : ', source);
-    console.log('destination : ', destination);
 
     if (!destination || destination.index === source.index) return
-    
-    // await dispatch(updateTaskInState({id: draggableId, newOrder}))
-    
+        
     const tasksContainerInDom = document.querySelectorAll('.main__container__undone .task')
     const tasksContainer = []
 
@@ -70,13 +63,6 @@ function App() {
         tasksContainer.push(foundTask)
       }
     }
-    console.log(tasksContainer);
-    // const copy = tasksContainer.map((task, index) => {
-    //   updateTaskInBdd({...task, order: index})
-    //   return {...task, order: index}
-    // })
-
-    // console.log(copy);
 
     dispatch(updateAllTasksInState([...tasksContainer, ...doneTasks]))
   }

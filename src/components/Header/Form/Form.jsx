@@ -1,27 +1,40 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addNewTask, saving, updateNewtaskInput } from '../../../actions'
+import { addNewTask, saving, updateAllTasksInState, updateNewtaskInput } from '../../../actions'
 import addTaskToBdd from '../../../hooks/addTaskToBdd'
+import updateTaskInBdd from '../../../hooks/updateTaskInBdd'
 
 import './Form.scss'
 
 const Form = () => {
-  const { darkMode, newTaskInput, user } = useSelector(state => state)
+  const { darkMode, newTaskInput, user, tasks } = useSelector(state => state)
 
   const dispatch = useDispatch()
 
+  
   const handleChange = (value) => {
     dispatch(updateNewtaskInput(value))
   }
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const undoneTasks = tasks.filter(task => !task.done)
+    const doneTasks = tasks.filter(task => task.done)
+
+    const tasksContainerInDom = document.querySelectorAll('.main__container__undone .task')
+    const tasksContainer = []
+    for (const task of tasksContainerInDom) {
+      const foundTask = undoneTasks.find(elt => elt.id === task.id)
+      updateTaskInBdd({...foundTask, order: (foundTask.order + 1)})
+      tasksContainer.push({...foundTask, order: (foundTask.order + 1)})
+    }
     
-    console.log(user);
     const id = await addTaskToBdd(newTaskInput, user)
-    console.log(id);
-    await updateNewtaskInput({id, newTaskInput, uid: user})
+    updateTaskInBdd({id, title: newTaskInput, uid: user})
+    dispatch(updateAllTasksInState([...tasksContainer, ...doneTasks ]))
     dispatch(addNewTask(id))
+    dispatch(updateNewtaskInput(''))
+
     dispatch(saving())
     setTimeout(() => {
       dispatch(saving())

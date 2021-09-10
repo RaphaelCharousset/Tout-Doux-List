@@ -60,6 +60,15 @@ export const updateTaskInState = ({id, newOrder}) => (
   }
 )
 
+export const UPDATE__TASK__IN__STATE__WITH__VALUE = 'UPDATE__TASK__IN__STATE__WITH__VALUE';
+export const updateTaskInStateWithValue = (id, value) => (
+  {
+    type: UPDATE__TASK__IN__STATE__WITH__VALUE,
+    id,
+    value
+  }
+)
+
 export const UPDATE__ALL__TASKS__IN__STATE = 'UPDATE__ALL__TASKS__IN__STATE'
 export const updateAllTasksInState = (tasks) => (
   {

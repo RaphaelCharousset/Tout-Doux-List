@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { saving, toggleDoneTask } from '../../../actions'
+import { saving, toggleDoneTask, updateTaskInStateWithValue } from '../../../actions'
 import updateTaskInBdd from '../../../hooks/updateTaskInBdd'
 
 import './Task.scss' 
@@ -11,12 +11,12 @@ const Task = ({ id, title, done, order, draggable, index }) => {
   const dispatch = useDispatch()
   const {darkMode, user} = useSelector(state => state)
 
-  const [taskTile, setTaskTitle] = useState(title)
+  const [taskTitle, setTaskTitle] = useState(title)
   const [editing, setEditing] = useState(false)
 
   const handleClick = async (e) => {
     dispatch(toggleDoneTask(e.target.closest('.task__checker').id))
-    await updateTaskInBdd({id, title, done: !done, order, uid: user})
+    await updateTaskInBdd({id, title: taskTitle, done: !done, order, uid: user})
     dispatch(saving())
     setTimeout(() => {
       dispatch(saving())
@@ -24,11 +24,10 @@ const Task = ({ id, title, done, order, draggable, index }) => {
   }
 
   const handleBlur = async (e) => {
-    // async func to update data and finally setEditing to false
-    // switch tasks in store to save it there and avoid bug on change title before change done bool
-    await setTaskTitle(e.target.value)
     setEditing(false)
-    await updateTaskInBdd({id, title: taskTile, done, order, uid: user})
+    dispatch(updateTaskInStateWithValue(id, taskTitle))
+    
+    await updateTaskInBdd({id, title: taskTitle, done, order, uid: user})
     dispatch(saving())
     setTimeout(() => {
       dispatch(saving())
@@ -97,9 +96,11 @@ const Task = ({ id, title, done, order, draggable, index }) => {
               <input
                 className="task__input"
                 type="text"
-                value={taskTile}
+                value={taskTitle}
                 autoFocus
-                onChange={e => setTaskTitle(e.target.value)}
+                onChange={e => {
+                  setTaskTitle(e.target.value)
+                }}
                 onBlur={e => handleBlur(e)}
               />
             ) : (
@@ -107,7 +108,7 @@ const Task = ({ id, title, done, order, draggable, index }) => {
                 className="task__span"
                 onClick={() => setEditing(true)}  
               >
-                {taskTile}
+                {taskTitle}
               </span>
             )}
           </div>
@@ -168,7 +169,7 @@ const Task = ({ id, title, done, order, draggable, index }) => {
           <input
             className="task__input"
             type="text"
-            value={taskTile}
+            value={taskTitle}
             autoFocus
             onChange={e => setTaskTitle(e.target.value)}
             onBlur={e => handleBlur(e)}
@@ -178,7 +179,7 @@ const Task = ({ id, title, done, order, draggable, index }) => {
             className="task__span"
             onClick={() => setEditing(true)}  
           >
-            {taskTile}
+            {taskTitle}
           </span>
         )}
       </div>

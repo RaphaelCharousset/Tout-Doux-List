@@ -7,7 +7,8 @@ import {
   TOGGLE__DONE__TASK,
   UPDATE__ALL__TASKS__IN__STATE,
   UPDATE__NEWTASK__INPUT,
-  UPDATE__TASK__IN__STATE
+  UPDATE__TASK__IN__STATE,
+  UPDATE__TASK__IN__STATE__WITH__VALUE
 } from '../actions';
 
 import deleteTaskFromBdd from '../hooks/deleteTaskFromBdd'
@@ -27,11 +28,13 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         user: action.user,
       }
+
     case 'SET_TASKS':
       return {
         ...state,
         tasks: action.tasks
       }
+
     case SAVING:
       return {
         ...state,
@@ -54,7 +57,7 @@ const reducer = (state = initialState, action = {}) => {
               done: false,
               order: 0,
               title: state.newTaskInput,
-              uid: state.uid
+              uid: state.user
             }
           ],
           newTaskInput: '',
@@ -77,6 +80,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         tasks: toggleCopy
       }
+
     case CLEAR__COMPLETED__TASKS:
       state.tasks.forEach( (task) => {
         if (task.done) {
@@ -87,8 +91,9 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         tasks: state.tasks.filter(task => !task.done)
       }
+
     case UPDATE__TASK__IN__STATE:
-      const copy = state.tasks.map( task => {
+      const copyOrder = state.tasks.map( task => {
         if (task.id === action.changedTaskId) {
           return {...task, order: action.newOrder}
         } else {
@@ -97,8 +102,22 @@ const reducer = (state = initialState, action = {}) => {
       })
       return {
         ...state, 
-        tasks: copy
+        tasks: copyOrder
       }
+
+    case UPDATE__TASK__IN__STATE__WITH__VALUE:
+      const copyValue = state.tasks.map( task => {
+        if (task.id === action.id) {
+          return {...task, title: action.value}
+        } else {
+          return task
+        }
+      })
+      return {
+        ...state, 
+        tasks: copyValue
+      }
+
     case UPDATE__ALL__TASKS__IN__STATE:
       return {
         ...state,
