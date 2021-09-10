@@ -51,10 +51,19 @@ export const connect = ({uid}) => (
   }
 );
 
-// export const FETCH_TASKS = 'FETCH_TASKS';
-// export const fetchTasks = ({uid}) => (
-//    {
-//     type: FETCH_TASKS,
-//     user: uid
-//   }
-// );
+export const UPDATE__TASK__IN__STATE = 'UPDATE__TASK__IN__STATE';
+export const updateTaskInState = ({id, newOrder}) => (
+  {
+    type: UPDATE__TASK__IN__STATE,
+    changedTaskId: id,
+    newOrder
+  }
+)
+
+export const UPDATE__ALL__TASKS__IN__STATE = 'UPDATE__ALL__TASKS__IN__STATE'
+export const updateAllTasksInState = (tasks) => (
+  {
+    type: UPDATE__ALL__TASKS__IN__STATE,
+    tasks
+  }
+)

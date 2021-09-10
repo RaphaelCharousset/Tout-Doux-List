@@ -5,14 +5,12 @@ import {
   SAVING,
   TOGGLE__DARKMODE,
   TOGGLE__DONE__TASK,
-  UPDATE__NEWTASK__INPUT
+  UPDATE__ALL__TASKS__IN__STATE,
+  UPDATE__NEWTASK__INPUT,
+  UPDATE__TASK__IN__STATE
 } from '../actions';
 
 import deleteTaskFromBdd from '../hooks/deleteTaskFromBdd'
-
-import { getData } from '../hooks/getData'
-
-// console.log(await getData());
 
 const initialState = {
   darkMode: false,
@@ -88,6 +86,23 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         tasks: state.tasks.filter(task => !task.done)
+      }
+    case UPDATE__TASK__IN__STATE:
+      const copy = state.tasks.map( task => {
+        if (task.id === action.changedTaskId) {
+          return {...task, order: action.newOrder}
+        } else {
+          return task
+        }
+      })
+      return {
+        ...state, 
+        tasks: copy
+      }
+    case UPDATE__ALL__TASKS__IN__STATE:
+      return {
+        ...state,
+        tasks: action.tasks
       }
     default:
       return state;
