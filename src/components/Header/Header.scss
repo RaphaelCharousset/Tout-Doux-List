@@ -28,6 +28,8 @@
   &__banner {
     display: flex;
     justify-content: space-between;
+    font-size: 2rem;
+    padding-bottom: 1rem;
 
     &__switch-mode {
       cursor: pointer;

@@ -5,8 +5,9 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 
 import { connect } from '../../actions'
 
-import './login.scss'
 import { LoginModal } from '../LoginModal';
+
+import './login.scss'
 
 const Login = () => {
   const auth = getAuth();
@@ -36,27 +37,15 @@ const Login = () => {
     setShowModal(undefined)
     const email = e.target[0].value
     const password = e.target[1].value
-    //todo check if sign or register
-    // if sign in, find in bdd user with email && pwd and add it in action payload and assign it in reducer
-    // if register, find account with with this email
-      // if no account found, create account
-      // if account found, show msg
 
-      signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
         const user = userCredential.user;
-        console.log(user);
         dispatch(connect(user))
-
-        // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.warn(errorCode, errorMessage);
         setGoodMsg(false)
-        setShowModal("Can't sign in")
+        setShowModal("Can't sign in : verify your email and password please")
       });
   }
   
@@ -99,7 +88,6 @@ const Login = () => {
           </h2>
           <h2
             className={toggleRegister ? "register__title active" : "register__title"}
-            className="register__title"
             onClick={() => handleRegisterClick()}
           >
             <label htmlFor="register">REGISTER</label>
