@@ -1,7 +1,10 @@
 <h1 align="center">Tout-doux-List</h1>
 
 <p>Hi there 👋</p>
-<p> Welcome on my Todo-list</p>
+<p>Welcome on my Todo-list 🤗</p>
+<p>👉 Through this project, I wanted to train on React / Redux combined with Firebase.</p>
+<p>👌 There is a lot of interactions with a todo-list and with a Sign up / Register interface</p>
+<p> </p>
 <p>I hope you'll enjoy !</p>
 
 <h2>Stack</h2>
