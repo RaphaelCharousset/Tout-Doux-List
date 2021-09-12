@@ -1,6 +1,7 @@
 import React from 'react'
 import { Droppable } from 'react-beautiful-dnd'
 import { useSelector } from 'react-redux'
+import PropTypes from 'prop-types'; 
 
 import Task from './Task/Task'
 
@@ -37,5 +38,26 @@ const Tasks = ({ undoneTasks, doneTasks }) => {
     </div>
   </main>
 )}
+
+Tasks.propTypes = {
+  undoneTasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      done: PropTypes.bool.isRequired,
+      order: PropTypes.number.isRequired,
+      uid: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  doneTasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      done: PropTypes.bool.isRequired,
+      order: PropTypes.number.isRequired,
+      uid: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+}
 
 export default Tasks

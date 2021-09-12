@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 import './loginmodal.scss'
 
@@ -10,4 +11,9 @@ export const LoginModal = ({message, goodMsg}) => {
       </div>
     </div>
   )
+}
+
+LoginModal.propTypes = {
+  message: PropTypes.string.isRequired,
+  goodMsg: PropTypes.bool.isRequired
 }

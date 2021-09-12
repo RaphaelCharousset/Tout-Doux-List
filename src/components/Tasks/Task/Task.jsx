@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
+import PropTypes from 'prop-types'; 
 
 import { clearSingleTask, saving, toggleDoneTask, updateTaskInStateWithValue } from '../../../actions'
 import deleteTaskFromBdd from '../../../hooks/deleteTaskFromBdd'
@@ -207,8 +208,15 @@ const Task = ({ id, title, done, order, draggable, index }) => {
       </div>
     )
   }
+}
 
-
+Task.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  done: PropTypes.bool.isRequired,
+  order: PropTypes.number.isRequired,
+  draggable: PropTypes.bool.isRequired,
+  index: PropTypes.number.isRequired,
 }
 
 export default Task
